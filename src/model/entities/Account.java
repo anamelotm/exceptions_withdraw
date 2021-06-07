@@ -44,18 +44,22 @@ public class Account {
 		return withdrawLimit;
 	}
 
-	public void deposit(Double amount) {
+	public void deposit(double amount) {
 		balance += amount;
 	}
 	
-	public void withdraw(Double amount) {
-		if (amount > withdrawLimit) {
+	public void withdraw(double amount) {
+		WithdrawException(amount);
+		balance -= amount;
+	}
+	
+	private void WithdrawException(double amount) {
+		if (amount > getWithdrawLimit()) {
 			throw new WithdrawException ("The amount exceeds withdraw limit");
 		}
-		else if(amount > balance) {
+		else if(amount > getBalance()) {
 			throw new WithdrawException ("Not enough balance");
 		}
-		balance -= amount;
 	}
 	
 	@Override
